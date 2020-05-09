@@ -19,6 +19,7 @@ package me.argraur.railgun.listeners
 import me.argraur.railgun.Railgun
 import me.argraur.railgun.command.Command
 import me.argraur.railgun.command.impls.utils.Ping
+import me.argraur.railgun.utils.checkLevel
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 
@@ -44,7 +45,8 @@ class MessageListener : ListenerAdapter() {
         val message = event.message
         val command = Railgun.prefix.filterPrefix(message).split(" ")[0]
         if (commandExists(command))
-            commands[command]?.exec(message)
-        else return
+            if (checkLevel(message, commands[command]!!))
+                commands[command]?.exec(message)
+            else return
     }
 }

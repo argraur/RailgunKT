@@ -16,9 +16,13 @@
 
 package me.argraur.railgun.command
 
+import me.argraur.railgun.utils.Level
 import net.dv8tion.jda.api.entities.Message
 
 interface Command {
     fun exec(message: Message)
     fun getName(): String
+    fun getLevel(): Level {
+        return Level.NORMAL
+    }
 }
