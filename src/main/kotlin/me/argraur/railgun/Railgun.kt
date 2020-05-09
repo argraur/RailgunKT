@@ -16,6 +16,7 @@
 
 package me.argraur.railgun
 
+import me.argraur.railgun.api.SauceNAO
 import me.argraur.railgun.listeners.MessageListener
 import me.argraur.railgun.utils.Config
 import me.argraur.railgun.utils.Prefix
@@ -32,6 +33,7 @@ class Railgun {
         val listener: MessageListener = MessageListener()
         val config: Config = Config()
         val prefix: Prefix = Prefix()
+        val sauceNAO: SauceNAO = SauceNAO()
     }
 
     private fun configure(): JDABuilder {

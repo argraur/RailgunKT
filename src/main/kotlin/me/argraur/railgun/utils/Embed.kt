@@ -47,6 +47,21 @@ class Embed {
         return this
     }
 
+    fun setTitle(title: String, url: String): Embed {
+        builder.setTitle(title, url)
+        return this
+    }
+
+    fun setAuthor(author: String): Embed {
+        builder.setAuthor(author)
+        return this
+    }
+
+    fun setImage(url: String): Embed {
+        builder.setImage(url)
+        return this
+    }
+
     fun create(): MessageEmbed {
         return builder.build()
     }

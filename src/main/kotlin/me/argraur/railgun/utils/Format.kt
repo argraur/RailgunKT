@@ -17,6 +17,7 @@
 package me.argraur.railgun.utils
 
 import net.dv8tion.jda.api.entities.Message
+import java.lang.IndexOutOfBoundsException
 
 class Format {
     companion object {
@@ -54,6 +55,18 @@ class Format {
                 else -> ""
             }
             return message.contentDisplay.replaceFirst("${message.contentDisplay.split(" ")[0]}${whitespace}","")
+        }
+
+        fun imageUrl(message: Message): String {
+            var url: String
+            url = try {
+                message.attachments.get(0).url
+            } catch (e: IndexOutOfBoundsException) {
+                stripCommand(message)
+            }
+            if (url.contains("?"))
+                url = url.substring(0, url.indexOf("?"))
+            return url
         }
     }
 }

@@ -20,6 +20,7 @@ import me.argraur.railgun.Railgun
 import me.argraur.railgun.command.Command
 import me.argraur.railgun.command.impls.admin.Prefix
 import me.argraur.railgun.command.impls.admin.Purge
+import me.argraur.railgun.command.impls.anime.Sauce
 import me.argraur.railgun.command.impls.utils.Ping
 import me.argraur.railgun.utils.checkLevel
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
@@ -43,6 +44,7 @@ class MessageListener : ListenerAdapter() {
         registerCommand(Ping())
         registerCommand(Prefix())
         registerCommand(Purge())
+        registerCommand(Sauce())
     }
 
     override fun onMessageReceived(event: MessageReceivedEvent) {
