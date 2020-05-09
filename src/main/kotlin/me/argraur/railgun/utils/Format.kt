@@ -16,6 +16,8 @@
 
 package me.argraur.railgun.utils
 
+import net.dv8tion.jda.api.entities.Message
+
 class Format {
     companion object {
         fun bold(str: String): String {
@@ -44,6 +46,10 @@ class Format {
 
         fun bashShell(str: String): String {
             return "```bash\n${str}\n```"
+        }
+
+        fun stripCommand(message: Message): String {
+            return message.contentDisplay.replaceFirst("${message.contentDisplay.split(" ")[0]} ","")
         }
     }
 }
