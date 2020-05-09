@@ -16,7 +16,9 @@
 
 package me.argraur.railgun
 
+import me.argraur.railgun.listeners.MessageListener
 import me.argraur.railgun.utils.Config
+import me.argraur.railgun.utils.Prefix
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.entities.Activity
@@ -26,11 +28,16 @@ class Railgun {
     private val token: String = "token"
     private val activity: String = "activity"
     private val discord: JDA
-    private val config: Config = Config()
+    companion object {
+        val listener: MessageListener = MessageListener()
+        val config: Config = Config()
+        val prefix: Prefix = Prefix()
+    }
 
     private fun configure(): JDABuilder {
         return JDABuilder
             .createDefault(config.getValue(token))
+            .addEventListeners(listener)
             .setCompression(Compression.NONE)
             .setActivity(Activity.playing(config.getValue(activity)))
     }
