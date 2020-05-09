@@ -49,7 +49,11 @@ class Format {
         }
 
         fun stripCommand(message: Message): String {
-            return message.contentDisplay.replaceFirst("${message.contentDisplay.split(" ")[0]} ","")
+            val whitespace = when {
+                message.contentDisplay.split(" ").size > 1 -> " "
+                else -> ""
+            }
+            return message.contentDisplay.replaceFirst("${message.contentDisplay.split(" ")[0]}${whitespace}","")
         }
     }
 }
