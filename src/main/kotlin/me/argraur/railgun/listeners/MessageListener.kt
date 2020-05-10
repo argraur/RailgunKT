@@ -18,6 +18,8 @@ package me.argraur.railgun.listeners
 
 import me.argraur.railgun.Railgun
 import me.argraur.railgun.command.Command
+import me.argraur.railgun.command.impls.admin.Ban
+import me.argraur.railgun.command.impls.admin.Kick
 import me.argraur.railgun.command.impls.admin.Prefix
 import me.argraur.railgun.command.impls.admin.Purge
 import me.argraur.railgun.command.impls.anime.Sauce
@@ -42,7 +44,9 @@ class MessageListener : ListenerAdapter() {
     }
 
     init {
+        registerCommand(Ban())
         registerCommand(Help())
+        registerCommand(Kick())
         registerCommand(Ping())
         registerCommand(Prefix())
         registerCommand(Purge())
