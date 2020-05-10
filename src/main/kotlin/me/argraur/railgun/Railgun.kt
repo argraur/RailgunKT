@@ -26,14 +26,18 @@ import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.utils.Compression
 
 class Railgun {
-    private val token: String = "token"
-    private val activity: String = "activity"
+    private val token = "token"
+    private val activity = "activity"
     private val discord: JDA
     companion object {
-        val listener: MessageListener = MessageListener()
-        val config: Config = Config()
-        val prefix: Prefix = Prefix()
-        val sauceNAO: SauceNAO = SauceNAO()
+        val listener = MessageListener()
+        val config = Config()
+        val prefix = Prefix()
+        val sauceNAO = SauceNAO()
+
+        @JvmStatic fun main(args: Array<String>) {
+            Railgun()
+        }
     }
 
     private fun configure(): JDABuilder {
@@ -47,8 +51,4 @@ class Railgun {
     init {
         discord = configure().build()
     }
-}
-
-fun main() {
-    Railgun()
 }
