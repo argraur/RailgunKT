@@ -22,6 +22,8 @@ import net.dv8tion.jda.api.entities.Message
 interface Command {
     fun exec(message: Message)
     fun getName(): String
+    fun getUsage(): String
+    fun getDesc(): String
     fun getLevel(): Level {
         return Level.NORMAL
     }

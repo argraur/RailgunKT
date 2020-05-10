@@ -16,11 +16,16 @@
 
 package me.argraur.railgun.utils
 
+import me.argraur.railgun.Railgun
 import net.dv8tion.jda.api.entities.Message
 import java.lang.IndexOutOfBoundsException
 
 class Format {
     companion object {
+        fun addPrefix(message: Message, str: String): String {
+            return "${Railgun.prefix.getPrefix(message)}$str"
+        }
+
         fun bold(str: String): String {
             return "**${str}**"
         }

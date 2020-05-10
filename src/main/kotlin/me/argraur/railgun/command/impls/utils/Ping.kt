@@ -23,6 +23,8 @@ import net.dv8tion.jda.api.entities.Message
 
 class Ping : Command {
     private val name = "ping"
+    private val usage = name
+    private val desc = "Pong!"
 
     override fun exec(message: Message) {
         val currentTime = System.currentTimeMillis()
@@ -33,5 +35,13 @@ class Ping : Command {
 
     override fun getName(): String {
         return name
+    }
+
+    override fun getUsage(): String {
+        return usage
+    }
+
+    override fun getDesc(): String {
+        return desc
     }
 }

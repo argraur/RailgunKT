@@ -25,6 +25,8 @@ import net.dv8tion.jda.api.entities.Message
 
 class Prefix: Command {
     private val name = "prefix"
+    private val usage = "$name <prefix>"
+    private val desc = "Sets new command prefix for this guild"
     private val level = Level.ADMIN
 
     override fun exec(message: Message) {
@@ -40,6 +42,14 @@ class Prefix: Command {
 
     override fun getName(): String {
         return name
+    }
+
+    override fun getUsage(): String {
+        return usage
+    }
+
+    override fun getDesc(): String {
+        return desc
     }
 
     override fun getLevel(): Level {

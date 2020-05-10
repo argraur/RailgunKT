@@ -24,6 +24,8 @@ import java.lang.NumberFormatException
 
 class Purge: Command {
     private val name = "purge"
+    private val usage = "$name <n> or $name <link>"
+    private val desc = "Removes last n messages or all messages until <link>ed message"
     private val level = Level.MESSAGE
 
     override fun exec(message: Message) {
@@ -41,6 +43,14 @@ class Purge: Command {
 
     override fun getName(): String {
         return name
+    }
+
+    override fun getUsage(): String {
+        return usage
+    }
+
+    override fun getDesc(): String {
+        return desc
     }
 
     override fun getLevel(): Level {

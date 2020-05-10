@@ -24,6 +24,8 @@ import net.dv8tion.jda.api.entities.Message
 
 class Sauce: Command {
     private val name = "sauce"
+    private val usage = "$name <imgurl> or attach image"
+    private val desc = "Finds image's source"
 
     override fun exec(message: Message) {
         val url = Format.imageUrl(message)
@@ -47,5 +49,13 @@ class Sauce: Command {
 
     override fun getName(): String {
         return name
+    }
+
+    override fun getUsage(): String {
+        return usage
+    }
+
+    override fun getDesc(): String {
+        return desc
     }
 }
