@@ -16,6 +16,7 @@
 
 package me.argraur.railgun.utils
 
+import me.argraur.railgun.Railgun
 import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.entities.MessageEmbed
 import java.awt.Color
@@ -35,6 +36,15 @@ class Embed {
     fun addField(field: String, content: String): Embed {
         builder.addField(field, content, false)
         return this
+    }
+
+    fun setThumbnail(url: String): Embed {
+        builder.setThumbnail(url)
+        return this
+    }
+
+    fun setDefaultThumbnail(): Embed {
+        return setThumbnail(Railgun.picture)
     }
 
     fun setDesc(description: String): Embed {

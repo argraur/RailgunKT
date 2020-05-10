@@ -38,6 +38,7 @@ class Help: Command {
                 }
                 embed
                     .setTitle(name)
+                    .setDefaultThumbnail()
                     .addField("Usage", Format.shellYellow(Format.addPrefix(message, usage)))
                     .addField("Description", Format.shellYellow(desc))
                     .addField("Available commands", Format.shellYellow(avCommands))
@@ -46,6 +47,7 @@ class Help: Command {
                 val command = Railgun.listener.commands[commandName]
                 embed
                     .setTitle(command!!.getName())
+                    .setDefaultThumbnail()
                     .addField("Usage", Format.shellYellow(Format.addPrefix(message, command.getUsage())))
                     .addField("Description", Format.shellYellow(command.getDesc()))
                     .create()

@@ -32,6 +32,7 @@ class Railgun {
     companion object {
         val listener = MessageListener()
         val config = Config()
+        val picture = "https://media.discordapp.net/attachments/698965374317625345/699022743542169691/oof.jpg"
         val prefix = Prefix()
         val sauceNAO = SauceNAO()
 
