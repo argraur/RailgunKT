@@ -23,6 +23,7 @@ import me.argraur.railgun.command.impls.admin.Ban
 import me.argraur.railgun.command.impls.admin.Kick
 import me.argraur.railgun.command.impls.admin.Prefix
 import me.argraur.railgun.command.impls.admin.Purge
+import me.argraur.railgun.command.impls.anime.Kitsu
 import me.argraur.railgun.command.impls.anime.Sauce
 import me.argraur.railgun.command.impls.utils.Color
 import me.argraur.railgun.command.impls.utils.Help
@@ -54,6 +55,7 @@ class MessageListener : ListenerAdapter() {
         registerCommand(Hug())
         registerCommand(Juggle())
         registerCommand(Kick())
+        registerCommand(Kitsu())
         registerCommand(Mirror())
         registerCommand(Ping())
         registerCommand(Prefix())
