@@ -40,15 +40,12 @@ class Railgun {
         }
     }
 
-    private fun configure(): JDABuilder {
-        return JDABuilder
-            .createDefault(config.getValue(token))
-            .addEventListeners(listener)
-            .setCompression(Compression.NONE)
-            .setActivity(Activity.playing(config.getValue(activity)))
-    }
-
     init {
-        discord = configure().build()
+        discord = JDABuilder
+                .createDefault(config.getValue(token))
+                .addEventListeners(listener)
+                .setCompression(Compression.NONE)
+                .setActivity(Activity.playing(config.getValue(activity)))
+                .build()
     }
 }
