@@ -25,6 +25,7 @@ import me.argraur.railgun.command.impls.admin.Prefix
 import me.argraur.railgun.command.impls.admin.Purge
 import me.argraur.railgun.command.impls.anime.Kitsu
 import me.argraur.railgun.command.impls.anime.Sauce
+import me.argraur.railgun.command.impls.anime.Wait
 import me.argraur.railgun.command.impls.utils.Color
 import me.argraur.railgun.command.impls.utils.Help
 import me.argraur.railgun.command.impls.utils.Ping
@@ -62,6 +63,7 @@ class MessageListener : ListenerAdapter() {
         registerCommand(Purge())
         registerCommand(Sauce())
         registerCommand(Slap())
+        registerCommand(Wait())
     }
 
     override fun onMessageReceived(event: MessageReceivedEvent) {
