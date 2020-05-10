@@ -23,6 +23,7 @@ import me.argraur.railgun.command.impls.admin.Kick
 import me.argraur.railgun.command.impls.admin.Prefix
 import me.argraur.railgun.command.impls.admin.Purge
 import me.argraur.railgun.command.impls.anime.Sauce
+import me.argraur.railgun.command.impls.utils.Color
 import me.argraur.railgun.command.impls.utils.Help
 import me.argraur.railgun.command.impls.utils.Ping
 import me.argraur.railgun.utils.checkLevel
@@ -45,6 +46,7 @@ class MessageListener : ListenerAdapter() {
 
     init {
         registerCommand(Ban())
+        registerCommand(Color())
         registerCommand(Help())
         registerCommand(Kick())
         registerCommand(Ping())
