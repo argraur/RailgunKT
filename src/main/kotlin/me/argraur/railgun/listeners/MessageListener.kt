@@ -18,6 +18,7 @@ package me.argraur.railgun.listeners
 
 import me.argraur.railgun.Railgun
 import me.argraur.railgun.command.Command
+import me.argraur.railgun.command.impls.`fun`.*
 import me.argraur.railgun.command.impls.admin.Ban
 import me.argraur.railgun.command.impls.admin.Kick
 import me.argraur.railgun.command.impls.admin.Prefix
@@ -46,13 +47,19 @@ class MessageListener : ListenerAdapter() {
 
     init {
         registerCommand(Ban())
+        registerCommand(CoinFlip())
         registerCommand(Color())
+        registerCommand(EightBall())
         registerCommand(Help())
+        registerCommand(Hug())
+        registerCommand(Juggle())
         registerCommand(Kick())
+        registerCommand(Mirror())
         registerCommand(Ping())
         registerCommand(Prefix())
         registerCommand(Purge())
         registerCommand(Sauce())
+        registerCommand(Slap())
     }
 
     override fun onMessageReceived(event: MessageReceivedEvent) {
