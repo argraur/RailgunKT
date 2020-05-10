@@ -56,10 +56,10 @@ class Format {
 
         fun stripCommand(message: Message): String {
             val whitespace = when {
-                message.contentDisplay.split(" ").size > 1 -> " "
+                message.contentRaw.split(" ").size > 1 -> " "
                 else -> ""
             }
-            return message.contentDisplay.replaceFirst("${message.contentDisplay.split(" ")[0]}${whitespace}","")
+            return message.contentRaw.replaceFirst("${message.contentDisplay.split(" ")[0]}${whitespace}","")
         }
 
         fun imageUrl(message: Message): String {
