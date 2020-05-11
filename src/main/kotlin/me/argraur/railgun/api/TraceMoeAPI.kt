@@ -24,8 +24,8 @@ import org.json.JSONObject
 
 class TraceMoeAPI {
     companion object {
+        private const val url = "https://trace.moe/api/search?url="
         private val okHttp = OkHttpClient()
-        private val url = "https://trace.moe/api/search?url="
 
         private fun getResponse(url: String): String {
             return okHttp.newCall(
@@ -48,12 +48,11 @@ class TraceMoeAPI {
         }
 
         fun embed(wait: JSONObject): Embed {
-            val kitsu = KitsuAPI()
-            val anime = kitsu.search(getTitle(wait))
+            val anime = KitsuAPI.search(getTitle(wait))
             var s = wait.getFloat("at").toInt()
             val timestamp = ((s - 60.also { s %= it }) / 60).toString() + (if (s > 9) ":" else ":0") + s
             return Embed()
-                .setTitle(getTitle(wait), kitsu.getUrl(anime))
+                .setTitle(getTitle(wait), KitsuAPI.getUrl(anime))
                 .addField("Similarity", Format.shellOneLine(String.format("%.2f%%", wait.getFloat("similarity") * 100)))
                 .addField("Episode",
                     Format.bold(
@@ -65,12 +64,12 @@ class TraceMoeAPI {
                     )
                 )
                 .addField("Timestamp", Format.shellOneLine(timestamp))
-                .addField("Status", Format.bold(kitsu.getStatus(anime)))
-                .addField("Source", Format.bold(kitsu.getSource(anime)))
-                .addField("Rating", Format.shellOneLine(kitsu.getRating(anime)))
-                .addField("Genres", if (kitsu.getGenres(anime) != "") kitsu.getGenres(anime) else "N/A")
-                .setDesc("Synopsis\n${Format.shellYellow(kitsu.getSynopsis(anime))}")
-                .addField("YouTube PV", kitsu.getYTUrl(anime))
+                .addField("Status", Format.bold(KitsuAPI.getStatus(anime)))
+                .addField("Source", Format.bold(KitsuAPI.getSource(anime)))
+                .addField("Rating", Format.shellOneLine(KitsuAPI.getRating(anime)))
+                .addField("Genres", if (KitsuAPI.getGenres(anime) != "") KitsuAPI.getGenres(anime) else "N/A")
+                .setDesc("Synopsis\n${Format.shellYellow(KitsuAPI.getSynopsis(anime))}")
+                .addField("YouTube PV", KitsuAPI.getYTUrl(anime))
         }
     }
 }

@@ -16,7 +16,7 @@
 
 package me.argraur.railgun.command.impls.anime
 
-import me.argraur.railgun.Railgun
+import me.argraur.railgun.api.SauceNAO
 import me.argraur.railgun.command.Command
 import me.argraur.railgun.utils.Embed
 import me.argraur.railgun.utils.Format
@@ -37,7 +37,7 @@ class Sauce: Command {
                 .create()
         ).queue { response ->
             try {
-                val result = Railgun.sauceNAO.embed(Railgun.sauceNAO.search(message)!!)
+                val result = SauceNAO.embed(SauceNAO.search(message)!!)
                 message.delete().queue()
                 response.editMessage(result).queue()
             } catch (e: Exception) {

@@ -34,7 +34,6 @@ class Railgun {
         val config = Config()
         val picture = "https://media.discordapp.net/attachments/698965374317625345/699022743542169691/oof.jpg"
         val prefix = Prefix()
-        val sauceNAO = SauceNAO()
 
         @JvmStatic fun main(args: Array<String>) {
             Railgun()

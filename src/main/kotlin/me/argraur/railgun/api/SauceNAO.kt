@@ -29,65 +29,71 @@ import org.json.JSONException
 import org.json.JSONObject
 
 class SauceNAO {
-    private val url = "https://saucenao.com/search.php?"
-    private val contentType = "application/vnd.api+json"
-    private val accept = "application/vnd.api+json"
-    private val db = 999
-    private val outputType = 2
-    private val testMode = 0
-    private val numRes = 2
-    private val okHttp = OkHttpClient()
+    companion object {
+        private const val url = "https://saucenao.com/search.php?"
+        private const val contentType = "application/vnd.api+json"
+        private const val accept = "application/vnd.api+json"
+        private const val db = 999
+        private const val outputType = 2
+        private const val testMode = 0
+        private const val numRes = 2
+        private val okHttp = OkHttpClient()
 
-    private fun getResponse(url: String): String {
-        val request = Request.Builder()
-            .addHeader("Content-Type", contentType)
-            .addHeader("Accept", accept)
-            .url(url)
-            .build()
-        return okHttp.newCall(request).execute().body!!.string()
-    }
+        private fun getResponse(url: String): String {
+            val request = Request.Builder()
+                .addHeader("Content-Type", contentType)
+                .addHeader("Accept", accept)
+                .url(url)
+                .build()
+            return okHttp.newCall(request).execute().body!!.string()
+        }
 
-    fun search(message: Message): JSONObject? {
-        val imageUrl = Format.imageUrl(message)
-        var index = 0
-        val url = StringBuilder(this.url)
-            .append("db=$db")
-            .append("&output_type=$outputType")
-            .append("&testmode=$testMode")
-            .append("&numres=$numRes")
-            .append("&url=${imageUrl.replace(":", "%3A").replace("/", "%2F")}")
-        val response = getResponse(url.toString())
-        println(response)
-        val json = JSONObject(response)
-        val resultsFound = json.getJSONObject("header").getInt("results_returned")
-        return if (resultsFound != 0) {
-            try {
-                json.getJSONArray("results").getJSONObject(index).getJSONObject("data").getJSONArray("ext_urls")
-            } catch (e: JSONException) {
-                index++
-            }
-            json.getJSONArray("results").getJSONObject(index)
-        } else null
-    }
+        fun search(message: Message): JSONObject? {
+            val imageUrl = Format.imageUrl(message)
+            var index = 0
+            val url = StringBuilder(this.url)
+                .append("db=$db")
+                .append("&output_type=$outputType")
+                .append("&testmode=$testMode")
+                .append("&numres=$numRes")
+                .append("&url=${imageUrl.replace(":", "%3A").replace("/", "%2F")}")
+            val response = getResponse(url.toString())
+            println(response)
+            val json = JSONObject(response)
+            val resultsFound = json.getJSONObject("header").getInt("results_returned")
+            return if (resultsFound != 0) {
+                try {
+                    json.getJSONArray("results").getJSONObject(index).getJSONObject("data").getJSONArray("ext_urls")
+                } catch (e: JSONException) {
+                    index++
+                }
+                json.getJSONArray("results").getJSONObject(index)
+            } else null
+        }
 
-    fun embed(result: JSONObject): MessageEmbed {
-        val embed = Embed()
-        embed.setAuthor(
-            try {
-                "Authored by: ${result.getJSONObject("data").getString("member_name")}"
-            } catch (e: Exception) {
-                "Authored by: N/A"
-            }
-        )
-        embed.setDesc("${Format.italic("Similarity")} ${Format.bold("${result.getJSONObject("header").getString("similarity")}%")}")
-        embed.setImage(result.getJSONObject("header").getString("thumbnail"))
-        embed.setTitle(
-            try {
-                result.getJSONObject("data").getString("title")
-            } catch (e: Exception) {
-                "Title unavailable"
-            }, result.getJSONObject("data").getJSONArray("ext_urls").getString(0)
-        )
-        return embed.create()
+        fun embed(result: JSONObject): MessageEmbed {
+            val embed = Embed()
+            embed.setAuthor(
+                try {
+                    "Authored by: ${result.getJSONObject("data").getString("member_name")}"
+                } catch (e: Exception) {
+                    "Authored by: N/A"
+                }
+            )
+            embed.setDesc(
+                "${Format.italic("Similarity")} ${Format.bold(
+                    "${result.getJSONObject("header").getString("similarity")}%"
+                )}"
+            )
+            embed.setImage(result.getJSONObject("header").getString("thumbnail"))
+            embed.setTitle(
+                try {
+                    result.getJSONObject("data").getString("title")
+                } catch (e: Exception) {
+                    "Title unavailable"
+                }, result.getJSONObject("data").getJSONArray("ext_urls").getString(0)
+            )
+            return embed.create()
+        }
     }
 }
