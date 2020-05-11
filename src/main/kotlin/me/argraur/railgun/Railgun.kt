@@ -17,6 +17,7 @@
 package me.argraur.railgun
 
 import me.argraur.railgun.api.SauceNAO
+import me.argraur.railgun.jenkins.Jenkins
 import me.argraur.railgun.listeners.MessageListener
 import me.argraur.railgun.utils.Config
 import me.argraur.railgun.utils.Prefix
@@ -33,6 +34,11 @@ class Railgun {
         val listener = MessageListener()
         val config = Config()
         val picture = "https://media.discordapp.net/attachments/698965374317625345/699022743542169691/oof.jpg"
+        val jenkins = Jenkins(
+            config.getValue("jenkins.url"),
+            config.getValue("jenkins.user"),
+            config.getValue("jenkins.pass")
+        )
         val prefix = Prefix()
 
         @JvmStatic fun main(args: Array<String>) {

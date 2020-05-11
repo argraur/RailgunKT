@@ -11,7 +11,7 @@ jar {
 }
 
 group 'me.argraur'
-version 'one'
+version 'two'
 
 repositories {
     mavenCentral()
@@ -28,7 +28,9 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:4.5.0"
     compile group: 'org.json', name: 'json', version: '20190722'
     compile 'de.androidpit:color-thief:1.1.2'
+    compile group: 'commons-logging', name: 'commons-logging', version: '1.2'
     compile 'com.twelvemonkeys.imageio:imageio-core:3.5'
+    compile 'com.offbytwo.jenkins:jenkins-client:0.3.8'
     compile group: 'commons-io', name: 'commons-io', version: '2.4'
 }
 

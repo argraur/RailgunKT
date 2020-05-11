@@ -31,6 +31,7 @@ import me.argraur.railgun.command.impls.utils.Blur
 import me.argraur.railgun.command.impls.utils.Color
 import me.argraur.railgun.command.impls.utils.Help
 import me.argraur.railgun.command.impls.utils.Ping
+import me.argraur.railgun.jenkins.commands.Build
 import me.argraur.railgun.utils.checkLevel
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
@@ -52,6 +53,7 @@ class MessageListener : ListenerAdapter() {
     init {
         registerCommand(Ban())
         registerCommand(Blur())
+        registerCommand(Build())
         registerCommand(CoinFlip())
         registerCommand(Color())
         registerCommand(EightBall())
