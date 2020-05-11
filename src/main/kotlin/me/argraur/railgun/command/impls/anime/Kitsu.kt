@@ -28,15 +28,14 @@ class Kitsu: Command {
     private val desc = "Search anime by query or genre"
 
     override fun exec(message: Message) {
-        val api = KitsuAPI()
         message.channel.sendMessage(Embed().fastCreate("Kitsu", "Processing your request ${message.author.asMention}...")).queue { response ->
             val request = Format.stripCommand(message)
             when (val subCommand = request.split(" ")[0]) {
                 "genre" -> {
-                    response.editMessage(api.embed(api.searchGenre(request.split(" ")[1]))).queue()
+                    response.editMessage(KitsuAPI.embed(KitsuAPI.searchGenre(request.split(" ")[1]))).queue()
                 }
                 "search" -> {
-                    response.editMessage(api.embed(api.search(request.replace("$subCommand ", "")))).queue()
+                    response.editMessage(KitsuAPI.embed(KitsuAPI.search(request.replace("$subCommand ", "")))).queue()
                 }
             }
         }
