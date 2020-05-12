@@ -26,6 +26,7 @@ import me.argraur.railgun.command.impls.admin.Purge
 import me.argraur.railgun.command.impls.anime.Kitsu
 import me.argraur.railgun.command.impls.anime.Sauce
 import me.argraur.railgun.command.impls.anime.Wait
+import me.argraur.railgun.command.impls.owner.Restart
 import me.argraur.railgun.command.impls.owner.Shell
 import me.argraur.railgun.command.impls.owner.Shutdown
 import me.argraur.railgun.command.impls.utils.Blur
@@ -72,6 +73,7 @@ class MessageListener : ListenerAdapter() {
         registerCommand(Ping())
         registerCommand(Prefix())
         registerCommand(Purge())
+        registerCommand(Restart())
         registerCommand(Sauce())
         registerCommand(Shell())
         registerCommand(Shutdown())

@@ -55,6 +55,12 @@ class Railgun {
             logger.closeWriter()
             exitProcess(0)
         }
+
+        fun restart() {
+            Thread.sleep(1000 * 10)
+            logger.I("Restarting bot...", this.javaClass.simpleName)
+            main(arrayOf())
+        }
     }
 
     init {
