@@ -16,6 +16,7 @@
 
 package me.argraur.railgun.utils
 
+import me.argraur.railgun.Railgun
 import java.io.FileNotFoundException
 import java.io.InputStream
 import java.util.*
@@ -27,7 +28,8 @@ class Config() {
     init {
         val inputStream: InputStream = javaClass.classLoader.getResourceAsStream(filename) ?: throw FileNotFoundException("$filename resource not found!")
         config.load(inputStream)
-        println("${javaClass.name}: Ready!")
+        for (key in config.keys)
+            Railgun.logger.D("${key.toString()}=${config.getProperty(key.toString())}", this.javaClass.simpleName)
     }
 
     fun getValue(key: String): String {

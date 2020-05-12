@@ -27,6 +27,7 @@ import me.argraur.railgun.command.impls.anime.Kitsu
 import me.argraur.railgun.command.impls.anime.Sauce
 import me.argraur.railgun.command.impls.anime.Wait
 import me.argraur.railgun.command.impls.owner.Shell
+import me.argraur.railgun.command.impls.owner.Shutdown
 import me.argraur.railgun.command.impls.utils.Blur
 import me.argraur.railgun.command.impls.utils.Color
 import me.argraur.railgun.command.impls.utils.Help
@@ -41,16 +42,21 @@ class MessageListener : ListenerAdapter() {
 
     private fun registerCommand(command: Command) {
         commands[command.getName()] = command
-        println("${javaClass.name}: Registered command ${command.getName()}!")
+        Railgun.logger.D("Registered command ${command.getName()}", this.javaClass.simpleName)
     }
 
     private fun commandExists(command: String): Boolean {
-        if (commands[command] != null)
+        Railgun.logger.D("Checking if command $command exists...", this.javaClass.simpleName)
+        if (commands[command] != null) {
+            Railgun.logger.D("Command $command exists.", this.javaClass.simpleName)
             return true
+        }
+        Railgun.logger.E("Command $command doesn't exist.", this.javaClass.simpleName)
         return false
     }
 
     init {
+        Railgun.logger.I("Registering commands", this.javaClass.simpleName)
         registerCommand(Ban())
         registerCommand(Blur())
         registerCommand(Build())
@@ -68,16 +74,32 @@ class MessageListener : ListenerAdapter() {
         registerCommand(Purge())
         registerCommand(Sauce())
         registerCommand(Shell())
+        registerCommand(Shutdown())
         registerCommand(Slap())
         registerCommand(Wait())
     }
 
     override fun onMessageReceived(event: MessageReceivedEvent) {
         val message = event.message
+        if (message.author.isBot) {
+            Railgun.logger.D("Bot's message. Do nothing.", this.javaClass.simpleName)
+            return
+        }
+        Railgun.logger.D("Received message from guild ${message.guild.name}/${message.guild.id}", this.javaClass.simpleName)
+        Railgun.logger.D("                 from member ${message.author.name}/${message.author.asTag}", this.javaClass.simpleName)
+        Railgun.logger.D("                 with content: ${message.contentRaw}", this.javaClass.simpleName)
+        if (!message.contentRaw.startsWith(Railgun.prefix.getPrefix(message))) {
+            Railgun.logger.D("Normal message. Do nothing.", this.javaClass.simpleName)
+            return
+        }
         val command = Railgun.prefix.filterPrefix(message).split(" ")[0]
-        if (commandExists(command))
-            if (checkLevel(message, commands[command]!!))
+        if (commandExists(command)) {
+            Railgun.logger.I("Command received: $command", this.javaClass.simpleName)
+            if (checkLevel(message, commands[command]!!)) {
+                Railgun.logger.I("Executing command $command", this.javaClass.simpleName)
                 commands[command]?.exec(message)
+            }
             else return
+        }
     }
 }
