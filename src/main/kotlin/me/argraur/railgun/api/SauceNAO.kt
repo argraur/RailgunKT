@@ -18,6 +18,7 @@ package me.argraur.railgun.api
 
 import me.argraur.railgun.utils.Embed
 import me.argraur.railgun.utils.Format
+import me.argraur.railgun.utils.ImageColor
 
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.MessageEmbed
@@ -27,6 +28,7 @@ import okhttp3.Request
 
 import org.json.JSONException
 import org.json.JSONObject
+import java.awt.Color
 
 class SauceNAO {
     companion object {
@@ -72,28 +74,23 @@ class SauceNAO {
         }
 
         fun embed(result: JSONObject): MessageEmbed {
-            val embed = Embed()
-            embed.setAuthor(
-                try {
-                    "Authored by: ${result.getJSONObject("data").getString("member_name")}"
-                } catch (e: Exception) {
-                    "Authored by: N/A"
-                }
-            )
-            embed.setDesc(
-                "${Format.italic("Similarity")} ${Format.bold(
-                    "${result.getJSONObject("header").getString("similarity")}%"
-                )}"
-            )
-            embed.setImage(result.getJSONObject("header").getString("thumbnail"))
-            embed.setTitle(
-                try {
-                    result.getJSONObject("data").getString("title")
-                } catch (e: Exception) {
-                    "Title unavailable"
-                }, result.getJSONObject("data").getJSONArray("ext_urls").getString(0)
-            )
-            return embed.create()
+            return Embed(Color.decode("#${ImageColor.getColor(result.getJSONObject("header").getString("thumbnail"))}"))
+                    .setAuthor(
+                            try {
+                                "Authored by: ${result.getJSONObject("data").getString("member_name")}"
+                            } catch (e: Exception) {
+                                "Authored by: N/A"
+                            }
+                    )
+                    .setDesc("${Format.italic("Similarity")} ${Format.bold("${result.getJSONObject("header").getString("similarity")}%")}")
+                    .setImage(result.getJSONObject("header").getString("thumbnail"))
+                    .setTitle(
+                        try {
+                            result.getJSONObject("data").getString("title")
+                        } catch (e: Exception) {
+                            "Title unavailable"
+                        }, result.getJSONObject("data").getJSONArray("ext_urls").getString(0)
+                    ).create()
         }
     }
 }

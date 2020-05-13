@@ -20,7 +20,9 @@ import me.argraur.railgun.api.SauceNAO
 import me.argraur.railgun.command.Command
 import me.argraur.railgun.utils.Embed
 import me.argraur.railgun.utils.Format
+import me.argraur.railgun.utils.ImageColor
 import net.dv8tion.jda.api.entities.Message
+import java.awt.Color
 
 class Sauce: Command {
     private val name = "sauce"
@@ -30,7 +32,7 @@ class Sauce: Command {
     override fun exec(message: Message) {
         val url = Format.imageUrl(message)
         message.channel.sendMessage(
-            Embed()
+            Embed(Color.decode("#${ImageColor.getColor(url)}"))
                 .setTitle("Processing image...")
                 .setDesc(message.author.asMention)
                 .setImage(url)
