@@ -16,15 +16,12 @@
 
 package me.argraur.railgun.utils
 
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import me.argraur.railgun.Railgun
-
-import kotlinx.coroutines.*
 import net.dv8tion.jda.api.entities.ChannelType
-import net.dv8tion.jda.api.entities.Guild
 import net.dv8tion.jda.api.entities.Message
 import java.io.*
-import java.lang.Exception
-import java.lang.IllegalStateException
 
 class Prefix {
     private val key = "prefix"
@@ -32,7 +29,7 @@ class Prefix {
     private val default = Railgun.config.getValue(key)
     private lateinit var prefixes: HashMap<String, String>
 
-    private fun readObject(file: String): Any {
+    private fun readObject(): Any {
         val fileInputStream = FileInputStream(file)
         val objectInputStream = ObjectInputStream(fileInputStream)
         val any = objectInputStream.readObject()
@@ -76,7 +73,7 @@ class Prefix {
 
     init {
         try {
-            val any = readObject(file)
+            val any = readObject()
             if (any is HashMap<*, *>)
                 prefixes = any as HashMap<String, String>
         } catch (e: FileNotFoundException) {

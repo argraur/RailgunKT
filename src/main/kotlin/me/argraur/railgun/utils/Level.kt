@@ -31,7 +31,7 @@ enum class Level {
 }
 
 fun checkLevel(message: Message, command: Command): Boolean {
-    if (message.author.id.equals(Railgun.config.getValue("goshujinsama")))
+    if (message.author.id == Railgun.config.getValue("goshujinsama"))
         return true
     return when (command.getLevel()) {
         Level.OWNER -> false

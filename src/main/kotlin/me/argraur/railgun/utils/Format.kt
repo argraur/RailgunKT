@@ -65,10 +65,17 @@ class Format {
         fun imageUrl(message: Message): String {
             var url: String
             url = try {
-                message.attachments.get(0).url
+                message.attachments[0].url
             } catch (e: IndexOutOfBoundsException) {
                 stripCommand(message)
             }
+            if (url.contains("?"))
+                url = url.substring(0, url.indexOf("?"))
+            return url
+        }
+
+        fun imageUrl(str: String): String {
+            var url = str
             if (url.contains("?"))
                 url = url.substring(0, url.indexOf("?"))
             return url

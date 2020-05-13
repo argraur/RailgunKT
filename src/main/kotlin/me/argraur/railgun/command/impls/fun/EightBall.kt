@@ -19,9 +19,7 @@ package me.argraur.railgun.command.impls.`fun`
 import me.argraur.railgun.command.Command
 import me.argraur.railgun.utils.Embed
 import me.argraur.railgun.utils.Format
-import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.entities.Message
-import java.awt.Color
 import kotlin.random.Random
 
 

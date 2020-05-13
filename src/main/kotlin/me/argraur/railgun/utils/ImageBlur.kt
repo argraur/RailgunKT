@@ -19,13 +19,11 @@ package me.argraur.railgun.utils
 import com.twelvemonkeys.image.ConvolveWithEdgeOp
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.Response
-import java.awt.image.BufferedImage
 import java.awt.image.Kernel
-import java.io.*
-import java.util.*
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
+import java.io.InputStream
 import javax.imageio.ImageIO
-import kotlin.math.pow
 
 class ImageBlur {
     companion object {

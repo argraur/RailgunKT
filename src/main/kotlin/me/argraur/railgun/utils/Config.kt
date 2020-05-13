@@ -21,7 +21,7 @@ import java.io.FileNotFoundException
 import java.io.InputStream
 import java.util.*
 
-class Config() {
+class Config {
     private val filename: String = "config.properties"
     private val config: Properties = Properties()
 
@@ -29,7 +29,7 @@ class Config() {
         val inputStream: InputStream = javaClass.classLoader.getResourceAsStream(filename) ?: throw FileNotFoundException("$filename resource not found!")
         config.load(inputStream)
         for (key in config.keys)
-            Railgun.logger.D("${key.toString()}=${config.getProperty(key.toString())}", this.javaClass.simpleName)
+            Railgun.logger.D("$key=${config.getProperty(key.toString())}", this.javaClass.simpleName)
     }
 
     fun getValue(key: String): String {
