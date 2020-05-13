@@ -11,7 +11,7 @@ jar {
 }
 
 group 'me.argraur'
-version 'two'
+version 'three'
 
 repositories {
     mavenCentral()
