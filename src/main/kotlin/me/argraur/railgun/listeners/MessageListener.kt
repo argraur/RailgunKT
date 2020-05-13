@@ -29,10 +29,7 @@ import me.argraur.railgun.command.impls.anime.Wait
 import me.argraur.railgun.command.impls.owner.Restart
 import me.argraur.railgun.command.impls.owner.Shell
 import me.argraur.railgun.command.impls.owner.Shutdown
-import me.argraur.railgun.command.impls.utils.Blur
-import me.argraur.railgun.command.impls.utils.Color
-import me.argraur.railgun.command.impls.utils.Help
-import me.argraur.railgun.command.impls.utils.Ping
+import me.argraur.railgun.command.impls.utils.*
 import me.argraur.railgun.jenkins.commands.Build
 import me.argraur.railgun.utils.checkLevel
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
@@ -78,6 +75,7 @@ class MessageListener : ListenerAdapter() {
         registerCommand(Shell())
         registerCommand(Shutdown())
         registerCommand(Slap())
+        registerCommand(YouTubeSong())
         registerCommand(Wait())
     }
 
@@ -87,9 +85,7 @@ class MessageListener : ListenerAdapter() {
             Railgun.logger.D("Bot's message. Do nothing.", this.javaClass.simpleName)
             return
         }
-        Railgun.logger.D("Received message from guild ${message.guild.name}/${message.guild.id}", this.javaClass.simpleName)
-        Railgun.logger.D("                 from member ${message.author.name}/${message.author.asTag}", this.javaClass.simpleName)
-        Railgun.logger.D("                 with content: ${message.contentRaw}", this.javaClass.simpleName)
+        Railgun.logger.D("Received message with content: ${message.contentRaw}", this.javaClass.simpleName)
         if (!message.contentRaw.startsWith(Railgun.prefix.getPrefix(message))) {
             Railgun.logger.D("Normal message. Do nothing.", this.javaClass.simpleName)
             return

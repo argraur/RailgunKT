@@ -16,6 +16,7 @@ version 'two'
 repositories {
     mavenCentral()
     jcenter()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -32,6 +33,7 @@ dependencies {
     compile 'com.twelvemonkeys.imageio:imageio-core:3.5'
     compile 'com.offbytwo.jenkins:jenkins-client:0.3.8'
     compile group: 'commons-io', name: 'commons-io', version: '2.4'
+    implementation 'com.github.sealedtx:java-youtube-downloader:2.1.2'
 }
 
 compileKotlin {
